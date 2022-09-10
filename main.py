@@ -5,12 +5,14 @@ from controller.products_controller import names_products_controller
 from controller.products_controller import seacrh_products_controller
 from controller.prediction_controller import prediction_product_controller
 import json
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-
-path_url = '/msdemo/v1'
+name_service =  os.environ['NAME_SERVICE']
+version = os.environ['VERSION']
+path_url = f'/{name_service}/{version}'
 
 
 def body_response(body={}, status=200):
@@ -35,13 +37,13 @@ def category_products():
     return result
 
 
-@app.route(f'{path_url}/seacrh-products', methods=['POST'])
-def seacrh_products():
-    app.logger.info('Method seacrh_products init')
+@app.route(f'{path_url}/search-products', methods=['POST'])
+def search_products():
+    app.logger.info('Method search_products init')
     body = dict(request.json)
     message, status_code = seacrh_products_controller(body)
     result = body_response(message, status_code)
-    app.logger.info('Method seacrh_products ending')
+    app.logger.info('Method search_products ending')
     return result
 
 @app.route(f'{path_url}/prediction-product', methods=['POST'])

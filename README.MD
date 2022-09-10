@@ -19,6 +19,8 @@ pip install -r requirements.txt
 ## Variables de entorno.
 ```
 export FLASK_APP=main.py
+export VERSION=v1
+export NAME_SERVICE=msdemo
 ```
 ## Ejecutar el proyecto.
 ```
